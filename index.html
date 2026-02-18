@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quelle infusion de plantes Teatower est faite pour vous ? 🌿 Quiz détente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       Teatower Design System
+       Based on https://teatower.com CSS variables
+       Font: Poppins | Theme: Détox
+       ============================================ */
+
+    :root {
+      /* Colors — from teatower.com */
+      --color-background: 255,255,255;
+      --color-foreground: 0,0,0;
+      --color-button: 0,0,0;
+      --color-button-text: 239,240,245;
+      --color-link: 22,57,62;
+      --color-shadow: 22,57,62;
+
+      /* Accent palette — from teatower.com sections */
+      --color-teal: rgb(22,57,62);
+      --color-teal-light: rgb(34,80,87);
+      --color-beige: rgb(242,229,202);
+      --color-brown: rgb(109,58,5);
+      --color-bg: rgb(255,255,255);
+      --color-fg: rgb(0,0,0);
+      --color-btn: rgb(0,0,0);
+      --color-btn-text: rgb(239,240,245);
+
+      /* Typography */
+      --font-body-family: 'Poppins', sans-serif;
+      --font-heading-family: 'Poppins', sans-serif;
+      --font-body-weight: 400;
+      --font-body-weight-bold: 700;
+      --font-body-scale: 1.0;
+
+      /* Layout */
+      --page-width: 120rem;
+      --spacing-sections-desktop: 24px;
+      --spacing-sections-mobile: 20px;
+
+      /* Components */
+      --buttons-radius: 40px;
+      --inputs-radius: 26px;
+      --media-radius: 20px;
+      --card-radius: 1.8rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body-family);
+      font-weight: var(--font-body-weight);
+      background: rgb(var(--color-background));
+      color: rgb(var(--color-foreground));
+      line-height: 1.7;
+      font-size: 1.5rem;
+    }
+    @media (min-width: 750px) {
+      body { font-size: 1.6rem; }
+    }
+
+    /* ---- Announcement bar ---- */
+    .announcement-bar {
+      background: var(--color-teal);
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+    }
+    .announcement-bar a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ---- Header ---- */
+    .site-header {
+      background: rgb(var(--color-background));
+      border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .site-header img {
+      height: 36px;
+      width: auto;
+    }
+
+    /* ---- Hero / Banner ---- */
+    .hero-banner {
+      background: var(--color-teal);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 56px;
+    }
+    @media (min-width: 750px) {
+      .hero-banner { padding: 80px 20px 72px; }
+    }
+    .hero-banner .hero-emoji {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .hero-banner h1 {
+      font-family: var(--font-heading-family);
+      font-weight: 700;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .hero-banner .subtitle {
+      font-size: 1.4rem;
+      font-weight: 300;
+      opacity: 0.88;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .hero-banner .date-tag {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      opacity: 0.6;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+    }
+
+    /* ---- Page container ---- */
+    .page-container {
+      max-width: 68rem;
+      margin: 0 auto;
+      padding: 0 var(--spacing-sections-mobile);
+    }
+    @media (min-width: 750px) {
+      .page-container { padding: 0 var(--spacing-sections-desktop); }
+    }
+
+    /* ---- Intro text ---- */
+    .intro {
+      text-align: center;
+      padding: 44px 0 28px;
+    }
+    .intro p {
+      font-size: 1.4rem;
+      color: rgba(var(--color-foreground), 0.55);
+      font-style: italic;
+    }
+
+    /* ---- Progress bar ---- */
+    .progress-wrapper {
+      padding: 0 0 28px;
+    }
+    .progress-bar-bg {
+      height: 5px;
+      background: rgba(var(--color-foreground), 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--color-teal);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .progress-text {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: rgba(var(--color-foreground), 0.4);
+      letter-spacing: 0.02em;
+    }
+
+    /* ---- Question cards ---- */
+    .question-card {
+      background: rgb(var(--color-background));
+      border: 1px solid rgba(var(--color-foreground), 0.08);
+      border-radius: var(--media-radius);
+      padding: 36px 32px;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeInUp 0.45s ease forwards;
+    }
+    .question-card.hidden { display: none; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-fg);
+      color: rgb(var(--color-button-text));
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .question-card h2 {
+      font-family: var(--font-heading-family);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: rgb(var(--color-foreground));
+      line-height: 1.35;
+    }
+
+    .options { list-style: none; }
+    .options li { margin-bottom: 10px; }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      text-align: left;
+      padding: 14px 20px;
+      border: 1.5px solid rgba(var(--color-foreground), 0.12);
+      border-radius: var(--inputs-radius);
+      background: rgb(var(--color-background));
+      font-family: var(--font-body-family);
+      font-size: 1.4rem;
+      color: rgb(var(--color-foreground));
+      cursor: pointer;
+      transition: all 0.2s ease;
+      line-height: 1.5;
+    }
+    .option-btn:hover {
+      border-color: var(--color-teal);
+      background: rgba(22,57,62,0.04);
+    }
+    .option-btn.selected {
+      border-color: var(--color-teal);
+      background: rgba(22,57,62,0.07);
+      font-weight: 500;
+      box-shadow: 0 0 0 1px var(--color-teal);
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.8rem;
+      height: 2.8rem;
+      min-width: 2.8rem;
+      border-radius: 50%;
+      background: rgba(var(--color-foreground), 0.06);
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-right: 14px;
+      transition: all 0.2s ease;
+    }
+    .option-btn.selected .option-letter {
+      background: var(--color-teal);
+      color: #fff;
+    }
+
+    /* ---- Nav buttons ---- */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0 48px;
+    }
+
+    .btn {
+      font-family: var(--font-body-family);
+      font-size: 1.3rem;
+      font-weight: 500;
+      padding: 12px 28px;
+      border-radius: var(--buttons-radius);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+    .btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .btn-prev {
+      background: rgb(var(--color-background));
+      color: rgba(var(--color-foreground), 0.55);
+      border: 1.5px solid rgba(var(--color-foreground), 0.15);
+    }
+    .btn-prev:hover:not(:disabled) {
+      border-color: rgba(var(--color-foreground), 0.35);
+      color: rgb(var(--color-foreground));
+    }
+    .btn-next {
+      background: var(--color-btn);
+      color: rgb(var(--color-button-text));
+    }
+    .btn-next:hover:not(:disabled) {
+      opacity: 0.85;
+    }
+
+    /* ---- Results section ---- */
+    .results-section {
+      display: none;
+      padding: 48px 0 56px;
+      text-align: center;
+    }
+    .results-section.visible { display: block; }
+
+    .results-section > h2 {
+      font-family: var(--font-heading-family);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: rgb(var(--color-foreground));
+    }
+
+    .result-card {
+      background: rgb(var(--color-background));
+      border: 1px solid rgba(var(--color-foreground), 0.08);
+      border-radius: var(--card-radius);
+      padding: 44px 32px;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.97);
+      animation: resultReveal 0.5s ease forwards;
+      margin-bottom: 32px;
+    }
+    @keyframes resultReveal {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .result-card .result-emoji {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .result-card h3 {
+      font-family: var(--font-heading-family);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--color-teal);
+      margin-bottom: 4px;
+    }
+    .result-card .ingredients {
+      font-size: 1.3rem;
+      color: rgba(var(--color-foreground), 0.45);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .result-card .description {
+      font-size: 1.4rem;
+      color: rgba(var(--color-foreground), 0.65);
+      max-width: 48rem;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+    }
+
+    .btn-discover {
+      display: inline-block;
+      background: var(--color-btn);
+      color: rgb(var(--color-button-text));
+      padding: 14px 36px;
+      border-radius: var(--buttons-radius);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.3rem;
+      letter-spacing: 0.02em;
+      transition: all 0.2s ease;
+    }
+    .btn-discover:hover {
+      opacity: 0.85;
+    }
+
+    /* ---- Other infusions ---- */
+    .all-results {
+      margin-top: 48px;
+      text-align: left;
+    }
+    .all-results > h3 {
+      font-family: var(--font-heading-family);
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 24px;
+      color: rgb(var(--color-foreground));
+    }
+
+    .mini-result {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: rgb(var(--color-background));
+      border: 1px solid rgba(var(--color-foreground), 0.08);
+      border-radius: 1.6rem;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      border-left: 4px solid var(--color-teal);
+      transition: box-shadow 0.2s ease;
+    }
+    .mini-result:hover {
+      box-shadow: 0 2px 12px rgba(var(--color-shadow), 0.08);
+    }
+    .mini-result .mini-emoji {
+      font-size: 2rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      line-height: 1;
+    }
+    .mini-result h4 {
+      font-family: var(--font-heading-family);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-teal);
+      margin-bottom: 2px;
+    }
+    .mini-result .mini-ingredients {
+      font-size: 1.1rem;
+      color: rgba(var(--color-foreground), 0.4);
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+    .mini-result p {
+      font-size: 1.3rem;
+      color: rgba(var(--color-foreground), 0.6);
+      line-height: 1.55;
+    }
+    .mini-result a {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 1.2rem;
+      color: var(--color-teal);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .mini-result a:hover {
+      color: var(--color-teal-light);
+    }
+
+    /* ---- Restart ---- */
+    .restart-wrapper { text-align: center; margin-top: 36px; }
+    .btn-restart {
+      font-family: var(--font-body-family);
+      font-size: 1.2rem;
+      padding: 10px 28px;
+      border-radius: var(--buttons-radius);
+      background: transparent;
+      color: rgba(var(--color-foreground), 0.45);
+      border: 1.5px solid rgba(var(--color-foreground), 0.15);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-restart:hover {
+      border-color: var(--color-teal);
+      color: var(--color-teal);
+    }
+
+    /* ---- CTA bottom section ---- */
+    .cta-section {
+      background: var(--color-teal);
+      color: #fff;
+      text-align: center;
+      padding: 56px 20px;
+    }
+    .cta-section h3 {
+      font-family: var(--font-heading-family);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .cta-section p {
+      font-size: 1.3rem;
+      opacity: 0.82;
+      margin-bottom: 24px;
+      max-width: 56rem;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    .btn-cta-all {
+      display: inline-block;
+      background: #fff;
+      color: var(--color-teal);
+      padding: 14px 36px;
+      border-radius: var(--buttons-radius);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: 0.02em;
+      transition: all 0.2s ease;
+    }
+    .btn-cta-all:hover {
+      opacity: 0.9;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      background: rgb(var(--color-background));
+      border-top: 1px solid rgba(var(--color-foreground), 0.08);
+      padding: 40px 20px;
+    }
+    .footer-grid {
+      max-width: 96rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      font-size: 1.2rem;
+    }
+    @media (min-width: 750px) {
+      .footer-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .footer-grid h4 {
+      font-family: var(--font-heading-family);
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: rgb(var(--color-foreground));
+    }
+    .footer-grid ul {
+      list-style: none;
+    }
+    .footer-grid li {
+      margin-bottom: 6px;
+    }
+    .footer-grid a {
+      color: rgba(var(--color-foreground), 0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-grid a:hover {
+      color: var(--color-teal);
+    }
+    .footer-bottom {
+      max-width: 96rem;
+      margin: 28px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(var(--color-foreground), 0.06);
+      text-align: center;
+      font-size: 1.1rem;
+      color: rgba(var(--color-foreground), 0.35);
+    }
+    .footer-bottom a {
+      color: rgba(var(--color-foreground), 0.35);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement bar -->
+  <div class="announcement-bar">
+    <a href="https://teatower.com/policies/shipping-policy">Livraison OFFERTE dès 59€ d'achat &rarr;</a>
+  </div>
+
+  <!-- Header -->
+  <div class="site-header">
+    <a href="https://teatower.com" target="_blank">
+      <img src="https://teatower.com/cdn/shop/files/Teatower_-_logo_-BELGIAN_TEA_HOUSE.png?v=1690470785&width=240" alt="Teatower — Belgian Tea House">
+    </a>
+  </div>
+
+  <!-- Hero banner -->
+  <div class="hero-banner">
+    <div class="hero-emoji">🍵</div>
+    <h1>Quelle infusion de plantes<br>Teatower est faite pour vous ?</h1>
+    <p class="subtitle">La grisaille du quotidien mérite une pause bien-être… Répondez à ce quiz rapide et découvrez l'infusion idéale pour vous.</p>
+    <p class="date-tag">17 février 2026</p>
+  </div>
+
+  <!-- Main content -->
+  <div class="page-container">
+
+    <div class="intro" id="intro">
+      <p>🌿 Répondez à ces 5 questions pour trouver votre infusion parfaite.</p>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrapper" id="progressWrapper">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-text" id="progressText">Question 1 sur 5</p>
+    </div>
+
+    <!-- Question 1 -->
+    <div class="question-card" id="q1">
+      <span class="question-number">1</span>
+      <h2>Quel est votre besoin principal aujourd'hui ?</h2>
+      <ul class="options">
+        <li><button class="option-btn" data-q="1" data-answer="A"><span class="option-letter">A</span>Se calmer après une longue journée</button></li>
+        <li><button class="option-btn" data-q="1" data-answer="B"><span class="option-letter">B</span>Favoriser un sommeil paisible</button></li>
+        <li><button class="option-btn" data-q="1" data-answer="C"><span class="option-letter">C</span>Se détendre tout en restant lucide</button></li>
+        <li><button class="option-btn" data-q="1" data-answer="D"><span class="option-letter">D</span>Aider la digestion</button></li>
+        <li><button class="option-btn" data-q="1" data-answer="E"><span class="option-letter">E</span>Profiter d'une infusion gourmande</button></li>
+      </ul>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question-card hidden" id="q2">
+      <span class="question-number">2</span>
+      <h2>Quelle sensation recherchez-vous dans une infusion ?</h2>
+      <ul class="options">
+        <li><button class="option-btn" data-q="2" data-answer="A"><span class="option-letter">A</span>Apaisante et florale</button></li>
+        <li><button class="option-btn" data-q="2" data-answer="B"><span class="option-letter">B</span>Douce et enveloppante</button></li>
+        <li><button class="option-btn" data-q="2" data-answer="C"><span class="option-letter">C</span>Fraîche et tonique</button></li>
+        <li><button class="option-btn" data-q="2" data-answer="D"><span class="option-letter">D</span>Chaude et réconfortante</button></li>
+        <li><button class="option-btn" data-q="2" data-answer="E"><span class="option-letter">E</span>Fruité et gourmand</button></li>
+      </ul>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question-card hidden" id="q3">
+      <span class="question-number">3</span>
+      <h2>Quelle plante vous attire le plus ?</h2>
+      <ul class="options">
+        <li><button class="option-btn" data-q="3" data-answer="A"><span class="option-letter">A</span>Lavande</button></li>
+        <li><button class="option-btn" data-q="3" data-answer="B"><span class="option-letter">B</span>Camomille</button></li>
+        <li><button class="option-btn" data-q="3" data-answer="C"><span class="option-letter">C</span>Verveine</button></li>
+        <li><button class="option-btn" data-q="3" data-answer="D"><span class="option-letter">D</span>Mélisse</button></li>
+        <li><button class="option-btn" data-q="3" data-answer="E"><span class="option-letter">E</span>Millepertuis</button></li>
+      </ul>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question-card hidden" id="q4">
+      <span class="question-number">4</span>
+      <h2>Quand allez-vous savourer votre infusion ?</h2>
+      <ul class="options">
+        <li><button class="option-btn" data-q="4" data-answer="A"><span class="option-letter">A</span>En fin d'après-midi, pour ralentir</button></li>
+        <li><button class="option-btn" data-q="4" data-answer="B"><span class="option-letter">B</span>Juste avant de dormir</button></li>
+        <li><button class="option-btn" data-q="4" data-answer="C"><span class="option-letter">C</span>Après le dîner pour décompresser</button></li>
+        <li><button class="option-btn" data-q="4" data-answer="D"><span class="option-letter">D</span>Après un repas copieux</button></li>
+        <li><button class="option-btn" data-q="4" data-answer="E"><span class="option-letter">E</span>En milieu de journée comme pause plaisir</button></li>
+      </ul>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question-card hidden" id="q5">
+      <span class="question-number">5</span>
+      <h2>Comment décririez-vous votre humeur du moment ?</h2>
+      <ul class="options">
+        <li><button class="option-btn" data-q="5" data-answer="A"><span class="option-letter">A</span>Stressé·e, besoin de calme</button></li>
+        <li><button class="option-btn" data-q="5" data-answer="B"><span class="option-letter">B</span>Fatigué·e, envie de pause douce</button></li>
+        <li><button class="option-btn" data-q="5" data-answer="C"><span class="option-letter">C</span>Dynamique mais tendu·e</button></li>
+        <li><button class="option-btn" data-q="5" data-answer="D"><span class="option-letter">D</span>Léger·ère mais pas serein·e</button></li>
+        <li><button class="option-btn" data-q="5" data-answer="E"><span class="option-letter">E</span>Curieux·se et gourmand·e</button></li>
+      </ul>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-buttons" id="navButtons">
+      <button class="btn btn-prev" id="btnPrev" disabled>&larr; Précédent</button>
+      <button class="btn btn-next" id="btnNext" disabled>Suivant &rarr;</button>
+    </div>
+
+    <!-- Results -->
+    <div class="results-section" id="resultsSection">
+      <h2>🌿 Votre infusion idéale</h2>
+      <div class="result-card" id="resultCard"></div>
+
+      <div class="all-results">
+        <h3>Découvrez aussi nos autres infusions</h3>
+
+        <div class="mini-result" id="miniA">
+          <div class="mini-emoji">🌸</div>
+          <div>
+            <h4>Sérénité</h4>
+            <p class="mini-ingredients">Menthe, rose, lavande</p>
+            <p>Une infusion florale et apaisante, idéale pour relâcher la pression et retrouver le calme.</p>
+            <a href="https://teatower.com/collections/infusion-de-plantes" target="_blank">Découvrir Sérénité &rarr;</a>
+          </div>
+        </div>
+
+        <div class="mini-result" id="miniB">
+          <div class="mini-emoji">🌙</div>
+          <div>
+            <h4>Lady Dodo</h4>
+            <p class="mini-ingredients">Camomille, fenouil, tilleul</p>
+            <p>Douceur et réconfort dans une tasse, parfaite pour s'endormir en douceur.</p>
+            <a href="https://teatower.com/collections/infusion-de-plantes" target="_blank">Découvrir Lady Dodo &rarr;</a>
+          </div>
+        </div>
+
+        <div class="mini-result" id="miniC">
+          <div class="mini-emoji">🍃</div>
+          <div>
+            <h4>Relax</h4>
+            <p class="mini-ingredients">Verveine, gingembre, citronnelle</p>
+            <p>Un équilibre parfait entre fraîcheur et réconfort, pour détendre le corps tout en restant clair d'esprit.</p>
+            <a href="https://teatower.com/collections/infusion-de-plantes" target="_blank">Découvrir Relax &rarr;</a>
+          </div>
+        </div>
+
+        <div class="mini-result" id="miniD">
+          <div class="mini-emoji">☕</div>
+          <div>
+            <h4>L'Après-Repas</h4>
+            <p class="mini-ingredients">Anis, vanille, mélisse</p>
+            <p>Chaude et réconfortante, cette infusion aide la digestion après les repas.</p>
+            <a href="https://teatower.com/collections/infusion-de-plantes" target="_blank">Découvrir L'Après-Repas &rarr;</a>
+          </div>
+        </div>
+
+        <div class="mini-result" id="miniE">
+          <div class="mini-emoji">🍎</div>
+          <div>
+            <h4>Jardin Gourmand</h4>
+            <p class="mini-ingredients">Pomme, framboise, millepertuis</p>
+            <p>Une infusion fruitée et gourmande, pour une pause plaisir sans théine.</p>
+            <a href="https://teatower.com/collections/infusion-de-plantes" target="_blank">Découvrir Jardin Gourmand &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="restart-wrapper">
+        <button class="btn-restart" id="btnRestart">Refaire le quiz</button>
+      </div>
+    </div>
+
+  </div><!-- .page-container -->
+
+  <!-- CTA section -->
+  <div class="cta-section" id="ctaSection" style="display:none;">
+    <h3>🌿 En savoir plus sur les infusions de plantes</h3>
+    <p>Les infusions de plantes sont parfaites pour des moments de relaxation sans théine tout en profitant des vertus naturelles des plantes. Que vous ayez besoin de vous détendre, de mieux digérer ou simplement de savourer une pause bien-être, notre sélection d'infusions bio offre une réponse à chaque instant.</p>
+    <a href="https://teatower.com/collections/infusion-de-plantes" target="_blank" class="btn-cta-all">Voir toute la sélection Teatower</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h4>Teatower</h4>
+        <ul>
+          <li><a href="https://teatower.com/pages/boutique-liege" target="_blank">Boutique Liège</a></li>
+          <li><a href="https://teatower.com/pages/boutique-namur" target="_blank">Boutique Namur</a></li>
+          <li><a href="https://teatower.com/pages/boutique-waterloo" target="_blank">Boutique Waterloo</a></li>
+          <li><a href="https://teatower.com/pages/qui-sommes-nous" target="_blank">Qui sommes-nous</a></li>
+          <li><a href="https://teatower.com/pages/contact" target="_blank">Nous contacter</a></li>
+          <li><a href="https://teatower.com/blogs/articles" target="_blank">Notre blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Assistance</h4>
+        <ul>
+          <li><a href="https://teatower.com/pages/faq" target="_blank">FAQ Teatower</a></li>
+          <li><a href="https://teatower.com/policies/shipping-policy" target="_blank">Livraison</a></li>
+          <li>Paiement sécurisé</li>
+          <li>Retour jusqu'à 90 jours</li>
+          <li>Service client à l'écoute</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Mentions légales</h4>
+        <ul>
+          <li><a href="https://teatower.com/policies/legal-notice" target="_blank">Mentions légales</a></li>
+          <li><a href="https://teatower.com/policies/terms-of-service" target="_blank">Conditions générales de vente</a></li>
+          <li><a href="https://teatower.com/policies/privacy-policy" target="_blank">Politique de confidentialité</a></li>
+          <li><a href="https://teatower.com/policies/cookie-policy" target="_blank">Politique de cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026, <a href="https://teatower.com" target="_blank">Teatower</a>
+    </div>
+  </footer>
+
+  <script>
+    const answers = {};
+    let currentQ = 1;
+    const totalQ = 5;
+
+    const results = {
+      A: {
+        emoji: '🌸',
+        name: 'Sérénité',
+        ingredients: 'Menthe, rose, lavande',
+        description: 'Une infusion florale et apaisante, idéale pour relâcher la pression et retrouver le calme. Idéale après une journée chargée.',
+        url: 'https://teatower.com/collections/infusion-de-plantes'
+      },
+      B: {
+        emoji: '🌙',
+        name: 'Lady Dodo',
+        ingredients: 'Camomille, fenouil, tilleul',
+        description: 'Douceur et réconfort dans une tasse, parfaite pour s\'endormir en douceur et favoriser un sommeil paisible.',
+        url: 'https://teatower.com/collections/infusion-de-plantes'
+      },
+      C: {
+        emoji: '🍃',
+        name: 'Relax',
+        ingredients: 'Verveine, gingembre, citronnelle',
+        description: 'Un équilibre parfait entre fraîcheur et réconfort, pour détendre le corps tout en restant clair d\'esprit.',
+        url: 'https://teatower.com/collections/infusion-de-plantes'
+      },
+      D: {
+        emoji: '☕',
+        name: 'L\'Après-Repas',
+        ingredients: 'Anis, vanille, mélisse',
+        description: 'Chaude et réconfortante, cette infusion aide la digestion après les repas et prolonge la sensation de bien-être.',
+        url: 'https://teatower.com/collections/infusion-de-plantes'
+      },
+      E: {
+        emoji: '🍎',
+        name: 'Jardin Gourmand',
+        ingredients: 'Pomme, framboise, millepertuis',
+        description: 'Une infusion fruitée et gourmande, pour une pause plaisir sans théine.',
+        url: 'https://teatower.com/collections/infusion-de-plantes'
+      }
+    };
+
+    // Option click
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const q = this.dataset.q;
+        const answer = this.dataset.answer;
+
+        document.querySelectorAll(`[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+
+        answers[q] = answer;
+        updateNav();
+
+        if (currentQ < totalQ) {
+          setTimeout(() => goToQuestion(currentQ + 1), 400);
+        } else {
+          setTimeout(() => {
+            document.getElementById('btnNext').textContent = 'Voir mon résultat 🌿';
+            updateNav();
+          }, 200);
+        }
+      });
+    });
+
+    function goToQuestion(n) {
+      document.getElementById(`q${currentQ}`).classList.add('hidden');
+      currentQ = n;
+      const card = document.getElementById(`q${currentQ}`);
+      card.classList.remove('hidden');
+      card.style.animation = 'none';
+      card.offsetHeight;
+      card.style.animation = 'fadeInUp 0.45s ease forwards';
+
+      updateProgress();
+      updateNav();
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function updateProgress() {
+      const pct = ((currentQ - 1) / totalQ) * 100 + (answers[currentQ] ? 20 : 0);
+      document.getElementById('progressFill').style.width = Math.min(pct, 100) + '%';
+      document.getElementById('progressText').textContent = `Question ${currentQ} sur ${totalQ}`;
+    }
+
+    function updateNav() {
+      document.getElementById('btnPrev').disabled = currentQ === 1;
+      const allAnswered = Object.keys(answers).length === totalQ;
+
+      if (currentQ === totalQ && allAnswered) {
+        document.getElementById('btnNext').textContent = 'Voir mon résultat 🌿';
+        document.getElementById('btnNext').disabled = false;
+      } else {
+        document.getElementById('btnNext').textContent = 'Suivant \u2192';
+        document.getElementById('btnNext').disabled = !answers[currentQ];
+      }
+    }
+
+    document.getElementById('btnPrev').addEventListener('click', () => {
+      if (currentQ > 1) goToQuestion(currentQ - 1);
+    });
+
+    document.getElementById('btnNext').addEventListener('click', () => {
+      if (currentQ < totalQ && answers[currentQ]) {
+        goToQuestion(currentQ + 1);
+      } else if (currentQ === totalQ && Object.keys(answers).length === totalQ) {
+        showResults();
+      }
+    });
+
+    function showResults() {
+      const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+      Object.values(answers).forEach(a => counts[a]++);
+
+      let maxCount = 0;
+      let winner = 'A';
+      for (const [letter, count] of Object.entries(counts)) {
+        if (count > maxCount) {
+          maxCount = count;
+          winner = letter;
+        }
+      }
+
+      const result = results[winner];
+
+      for (let i = 1; i <= totalQ; i++) {
+        document.getElementById(`q${i}`).classList.add('hidden');
+      }
+      document.getElementById('navButtons').style.display = 'none';
+      document.getElementById('progressWrapper').style.display = 'none';
+      document.getElementById('intro').style.display = 'none';
+
+      const card = document.getElementById('resultCard');
+      card.innerHTML = `
+        <div class="result-emoji">${result.emoji}</div>
+        <h3>${result.name}</h3>
+        <p class="ingredients">${result.ingredients}</p>
+        <p class="description">${result.description}</p>
+        <a href="${result.url}" target="_blank" class="btn-discover">Découvrir ${result.name}</a>
+      `;
+
+      document.getElementById(`mini${winner}`).style.display = 'none';
+
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('ctaSection').style.display = '';
+
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Restart
+    document.getElementById('btnRestart').addEventListener('click', () => {
+      for (const key in answers) delete answers[key];
+      currentQ = 1;
+
+      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      document.getElementById('resultsSection').classList.remove('visible');
+      document.getElementById('ctaSection').style.display = 'none';
+      document.getElementById('navButtons').style.display = '';
+      document.getElementById('progressWrapper').style.display = '';
+      document.getElementById('intro').style.display = '';
+
+      ['A','B','C','D','E'].forEach(l => {
+        document.getElementById(`mini${l}`).style.display = '';
+      });
+
+      for (let i = 1; i <= totalQ; i++) {
+        document.getElementById(`q${i}`).classList.add('hidden');
+      }
+      document.getElementById('q1').classList.remove('hidden');
+
+      updateProgress();
+      updateNav();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    updateProgress();
+  </script>
+
+</body>
+</html>
